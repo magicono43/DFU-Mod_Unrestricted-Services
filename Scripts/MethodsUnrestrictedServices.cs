@@ -9,7 +9,6 @@
 // Modifier:			
 
 using DaggerfallWorkshop.Game;
-using DaggerfallWorkshop.Game.Utility.ModSupport;
 using UnityEngine;
 
 namespace UnrestrictedServices
@@ -18,7 +17,26 @@ namespace UnrestrictedServices
     {
         #region Methods and Functions
 
+        public static void RollServiceMember_OnTransitionInterior(PlayerEnterExit.TransitionEventArgs args)
+        {
+            bool validBuilding = ValidBuildingCheck();
+            // Work on continuing to build on this tomorrow, good start thus far.
+        }
 
+        // Checks that the building just entered in a valid building in which to potentially spawn a service providing NPC
+        public static bool ValidBuildingCheck()
+        {
+            if (GameManager.Instance.PlayerEnterExit.BuildingDiscoveryData.buildingType == DaggerfallConnect.DFLocation.BuildingTypes.Tavern) // Checks that the building just entered is a tavern.
+            {
+                Debug.Log("You Just Entered A Tavern, Good Job!...");
+                return true;
+            }
+            else
+            {
+                Debug.Log("You Just Entered Something Other Than A Tavern, Nice Job Idiot!");
+                return false;
+            }
+        }
 
         #endregion
 

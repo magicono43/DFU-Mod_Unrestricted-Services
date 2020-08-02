@@ -25,7 +25,7 @@ namespace UnrestrictedServices
             var go = new GameObject("UnrestrictedServices");
             go.AddComponent<MainUnrestrictedServices>();
 
-            PlayerEnterExit.OnTransitionInterior += RollServiceMember_OnTransitionInterior;
+            PlayerEnterExit.OnTransitionInterior += MethodsUnrestrictedServices.RollServiceMember_OnTransitionInterior;
         }
 
         void Awake()
@@ -48,10 +48,7 @@ namespace UnrestrictedServices
 
         #region Methods and Functions
 
-        public static void RollServiceMember_OnTransitionInterior(PlayerEnterExit.TransitionEventArgs args)
-        {
-
-        }
+        
 
         #endregion
 
