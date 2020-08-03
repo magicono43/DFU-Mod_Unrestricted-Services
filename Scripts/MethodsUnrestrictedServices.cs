@@ -8,7 +8,9 @@
 // Special Thanks:  Hazelnut
 // Modifier:			
 
+using DaggerfallWorkshop;
 using DaggerfallWorkshop.Game;
+using DaggerfallWorkshop.Utility;
 using UnityEngine;
 
 namespace UnrestrictedServices
@@ -20,7 +22,33 @@ namespace UnrestrictedServices
         public static void RollServiceMember_OnTransitionInterior(PlayerEnterExit.TransitionEventArgs args)
         {
             bool validBuilding = ValidBuildingCheck();
-            // Work on continuing to build on this tomorrow, good start thus far.
+            bool newBuilding = NewBuildingCheck(validBuilding);
+            RollServiceNPC(newBuilding); // Will equal an object later, object will be returned from this.
+        }
+
+        // WIP, Rolls if a valid building will spawn a service NPC and returns what type will spawn (as an appropriate object, void just for now.)
+        public static void RollServiceNPC(bool newBuilding)
+        {
+            int texArchive = 184;
+            int texRecord = 1;
+            string serviceFlat = "Service Person Flat";
+            GameObject node = new GameObject(serviceFlat);
+            GameObject go = null;
+            Vector3 billboardPosition = new Vector3(10, 0, 10) * MeshReader.GlobalScale;
+
+            // Spawn billboard gameobject
+            go = GameObjectHelper.CreateDaggerfallBillboardGameObject(texArchive, texRecord, node.transform); // This has something to do with creating a Flat/billboard NPC in the world, play around more and test.
+
+            // Set position
+            DaggerfallBillboard dfBillboard = go.GetComponent<DaggerfallBillboard>();
+            go.transform.position = billboardPosition;
+            go.transform.position += new Vector3(0, dfBillboard.Summary.Size.y / 2, 0);
+        }
+
+        // WIP, Checks that the building that IS valid, also does not currently have a service NPC in it, or has already had this spawn event happen within the minimum "reset" time.
+        public static bool NewBuildingCheck(bool validBuilding)
+        {
+            return true;
         }
 
         // Checks that the building just entered in a valid building in which to potentially spawn a service providing NPC
